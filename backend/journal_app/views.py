@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
 from rest_framework.decorators import api_view
+from .models import User
 import json, requests
 import os
 
@@ -12,8 +13,19 @@ def index(request):
     return resp
 
 # DJANGO API VIEWS
+@api_view(["POST"])
 def user_signup(request):
-    pass
+    if request.method == 'POST':
+        try:
+            print(request.data)
+            user = User.objects.create_user(username=request.data['username'], email=request.data['email'], password=request.data['password'])
+            user.save()
+            print('user created')
+            return JsonResponse({'success': 'success'})
+        except Exception as signup_exception:
+            print('signup failed to create user')
+            print(str(signup_exception))
+            return JsonResponse({'failure': 'failure'})
 
 def user_login(request):
     pass
