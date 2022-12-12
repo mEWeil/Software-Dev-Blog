@@ -10,7 +10,7 @@ import NavBar from '../components/NavBar'
 
 // PAGES
 import Home from '../pages/Home'
-import SignIn from '../pages/SignIn'
+import LogIn from '../pages/LogIn'
 import SignUp from '../pages/SignUp'
 import NewEntry from '../pages/NewEntry'
 import BrowseEntries from '../pages/BrowseEntries'
@@ -127,7 +127,7 @@ function App() {
       <Router hashType='hashbang' >
         <Routes>
           <Route path='' element={<Home/>} />
-          <Route path='signin/' element={<SignIn/>} />
+          <Route path='login/' element={<LogIn/>} />
           <Route path='signup/' element={<SignUp/>} />
           <Route path='newentry/' element={<NewEntry/>} />
           <Route path='browseentries/' element={<BrowseEntries/>} />

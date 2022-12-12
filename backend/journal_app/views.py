@@ -27,11 +27,30 @@ def user_signup(request):
             print(str(signup_exception))
             return JsonResponse({'failure': 'failure'})
 
+@api_view(["POST"])
 def user_login(request):
-    pass
+    if request.method == 'POST':
+        username = request.data['username']
+        password = request.data['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                try:
+                    login(request, user)
+                    return JsonResponse({'status': 'successs'})
+                except Exception as e:
+                    print(e)
+                    return JsonResponse({'failure': 'failed to log in'})
+            else:
+                return JsonResponse({'failure': 'user is not active'})
+        else:
+            return JsonResponse({'failure': 'no such user'})
 
+@api_view(["POST"])
 def user_logout(request):
-    pass
+    if request.method == 'POST':
+        logout(request)
+        return JsonResponse({'status': 'success'})
 
 # 3RD PARTY API VIEWS
 def get_quotes(request):
