@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
@@ -21,7 +21,7 @@ def user_signup(request):
             user = User.objects.create_user(username=request.data['username'], email=request.data['email'], password=request.data['password'])
             user.save()
             print('user created')
-            return JsonResponse({'success': 'success'})
+            return JsonResponse({'success': 'successfully signed up'})
         except Exception as signup_exception:
             print('signup failed to create user')
             print(str(signup_exception))
@@ -37,7 +37,7 @@ def user_login(request):
             if user.is_active:
                 try:
                     login(request, user)
-                    return JsonResponse({'status': 'successs'})
+                    return JsonResponse({'status': 'successsfully logged in', 'user': user})
                 except Exception as e:
                     print(e)
                     return JsonResponse({'failure': 'failed to log in'})
@@ -50,7 +50,17 @@ def user_login(request):
 def user_logout(request):
     if request.method == 'POST':
         logout(request)
-        return JsonResponse({'status': 'success'})
+        return JsonResponse({'status': 'successfully logged out'})
+
+@api_view(["GET"])
+def who_am_i(request):
+    if request.user.is_authenticated:
+        return JsonResponse({
+            'username': request.user.username,
+            'email': request.user.email
+        })
+    else:
+        return JsonResponse({'user':None})
 
 # 3RD PARTY API VIEWS
 def get_quotes(request):

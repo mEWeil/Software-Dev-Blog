@@ -1,25 +1,32 @@
 import React from 'react'
 import axios from 'axios'
+import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from 'react'
 
-export default function LogIn() {
+export default function LogIn({whoAmI ,userStatus, setUserStatus}) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
   const userLogin = () => {
+    event.preventDefault()
     axios.post('api/login', {
       'username': username,
       'password': password
     })
       .then((response)=>console.log(response))
+      .then(()=>setUserStatus(true))
+      .then(()=>navigate('/'))
       .catch((error)=>console.log(error))
   }
 
   const userLogout = () => {
-    axios.options('api/logout')
+    axios.post('api/logout')
       .then((response)=>console.log(response))
+      .then(()=>setUserStatus(false))
+      .then(()=>navigate('/'))
       .catch((error)=>console.log(error))
-  }
+  } 
 
   return (
     <div>

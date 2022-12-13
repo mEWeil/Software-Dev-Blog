@@ -3,7 +3,7 @@ from django.contrib.auth.models import (AbstractUser)
 
 class User(AbstractUser):
   username = models.CharField(max_length=20, unique=True)
-  password = models.CharField(max_length=100) # <-how to encrypt
+  password = models.CharField(max_length=100)
   email = models.EmailField(unique=True)
   is_active = models.BooleanField(default=True)
   USERNAME_FIELD = 'username'

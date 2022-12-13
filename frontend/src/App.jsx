@@ -1,19 +1,20 @@
 import './App.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { HashRouter as Router, Routes, Route } from 'react-router-dom'
-import { SplitButton , Dropdown } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { Routes, Route, Link } from 'react-router-dom'
+import { Flex, Button } from '@chakra-ui/react'
 
 // COMPONENTS
-import NavBar from '../components/NavBar'
+import LoginModal from '../components/LoginModal'
+import Logout from '../components/Logout'
 
 // PAGES
-import Home from '../pages/Home'
-import LogIn from '../pages/LogIn'
-import SignUp from '../pages/SignUp'
-import NewEntry from '../pages/NewEntry'
-import BrowseEntries from '../pages/BrowseEntries'
+import Home from '../pages/components/Home'
+import LogIn from '../pages/components/LogIn'
+import SignUp from '../pages/components/SignUp'
+import NewEntry from '../pages/components/NewEntry'
+import BrowseEntries from '../pages/components/BrowseEntries'
+// import {Home, LogIn, SignUp, NewEntry, BrowseEntries} from '../pages'
 
 function App() {
   // ARRAY OF 50 OBJECTS WITH QUOTES AND AUTHORS
@@ -24,6 +25,8 @@ function App() {
   const [categories, setCategories] = useState([])
   // RANDOMLY SELECTED PICTURE FROM CURRENT CATEGORY/THEME
   const [pictureUrls, setPictureUrls] = useState('')
+  const [userStatus, setUserStatus] = useState(false)
+  const [userInfo, setUserInfo] = useState({})
 
   // CSRF TOKEN
   function getCookie(name) {
@@ -57,25 +60,25 @@ function App() {
   //   setDisplayQuote(quotes[randNum])
   // }
 
-  // SENDS GET REQUEST > DJANGO > PEXELS TO RECIEVE TITLES AND IDS OF MY COLLECTIONS
-  const getCollectionIds = () => {
-    axios.get('api/getcollectionids')
-      .then((response)=>{
-        let collections = response.data.data.collections;
-        let collectionArr = [];
-        collections.map(collection=>{
-          collectionArr.push({title: collection.title, id: collection.id})
-        })
-        setCategories(collectionArr)})
-      .catch((error)=>console.log(error))
-  }
+  // // SENDS GET REQUEST > DJANGO > PEXELS TO RECIEVE TITLES AND IDS OF MY COLLECTIONS
+  // const getCollectionIds = () => {
+  //   axios.get('api/getcollectionids')
+  //     .then((response)=>{
+  //       let collections = response.data.data.collections;
+  //       let collectionArr = [];
+  //       collections.map(collection=>{
+  //         collectionArr.push({title: collection.title, id: collection.id})
+  //       })
+  //       setCategories(collectionArr)})
+  //     .catch((error)=>console.log(error))
+  // }
 
   // 
-  const getPictureUrls = () => {
-    axios.get('api/getcollectionurls')
-    .then((response)=>console.log(response))
-    .catch((error)=>console.log(error))
-  }
+  // const getPictureUrls = () => {
+  //   axios.get('api/getcollectionurls')
+  //   .then((response)=>console.log(response))
+  //   .catch((error)=>console.log(error))
+  // }
 
   // const sendPicture = () => {
   //   let randNum = Math.floor(Math.random()*50);
@@ -83,7 +86,12 @@ function App() {
   //   setDisplayQuote(quotes[randNum])
   // }
 
-  
+  // const whoAmI = () => {
+  //   axios.get('api/whoami')
+  //     .then(console.log('whoAmI fired'))
+  //     .then(response => setUserInfo(response.data))
+  //     .catch(error => console.log(error))
+  // }
 
   // RETRIEVES QUOTE ARRAY ON INITIAL RENDER
   useEffect(() => {
@@ -92,48 +100,70 @@ function App() {
     // getCollectionIds()
   }, [])
 
-  useEffect(() => {
-    console.log('in useEffect: ', categories)
-  }, [categories])
+  // useEffect(()=>{
+  //   whoAmI()
+  // }, [])
 
   return (
-
-    
-
     <div className="App">
 
-      <NavBar/>
+      <Flex>
+        <Flex position="fixed" top="1rem" right="1rem" align="center">
+          <Flex>
+            <Link to=''>
+              <Button as="a" variant="ghost" aria-label="Home" my={5} w="100%">
+                Home
+              </Button>
+            </Link>
 
-      <h1>App Screen</h1>
-      <SplitButton
-        key='Primary'
-        id={'dropdown-split-variants-Primary'}
-        variant='Primary'
-        title='Primary'
-        >
-        <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-        <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-        <Dropdown.Item eventKey="3" active>
-          Active Item
-        </Dropdown.Item>
-        <Dropdown.Divider />
-        <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
-      </SplitButton>
-      {/* <img src={pictureUrl} alt="pexels image"/> */}
-      {/* <button onClick={()=>sendQuote()}>Get Quote</button>
-      <h3>{displayQuote.q}</h3> 
-      <h4>{displayQuote.a}</h4> */}
+            {userStatus ?
+              <Logout setUserStatus={setUserStatus} />
+            :
+            <>
+              <LoginModal setUserStatus={setUserStatus} />
 
-      <Router hashType='hashbang' >
-        <Routes>
-          <Route path='' element={<Home/>} />
-          <Route path='login/' element={<LogIn/>} />
-          <Route path='signup/' element={<SignUp/>} />
-          <Route path='newentry/' element={<NewEntry/>} />
-          <Route path='browseentries/' element={<BrowseEntries/>} />
-        </Routes>
-      </Router>
-      
+              <Link to='/signup'>
+                <Button as="a" variant="ghost" aria-label="About" my={5} w="100%">
+                  Sign Up
+                </Button>
+              </Link>
+            </>
+            }
+
+            <Link to='/newentry'>
+              <Button as="a" variant="ghost" aria-label="Contact" my={5} w="100%">
+                New Entry
+              </Button>
+            </Link>
+
+            <Link to='/browseentries'>
+              <Button as="a" variant="ghost" aria-label="Contact" my={5} w="100%">
+                Browse Entries
+              </Button>
+            </Link>
+            </Flex>
+          </Flex>
+      </Flex>
+
+
+        {/* {userInfo ?
+          <h2>Welcome {userInfo.username}!</h2>
+          :
+          <h2>Please log in.</h2>} */}
+
+        {/* <img src={pictureUrl} alt="pexels image"/> */}
+        {/* <button onClick={()=>sendQuote()}>Get Quote</button>
+        <h3>{displayQuote.q}</h3> 
+        <h4>{displayQuote.a}</h4> */}
+
+          <Routes>
+            <Route path='' element={<Home/>} />
+            {/* <Route path='login/' element={<LogIn whoAmI={whoAmI} userStatus={userStatus} setUserStatus={setUserStatus} />} /> */}
+            <Route path='signup/' element={<SignUp/>} />
+            <Route path='newentry/' element={<NewEntry/>} />
+            <Route path='browseentries/' element={<BrowseEntries/>} />
+          </Routes>
+        
     </div>
   )
 }

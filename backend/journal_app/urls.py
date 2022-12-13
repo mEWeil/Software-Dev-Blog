@@ -1,13 +1,14 @@
 from . import views
-from django.urls import path
+from django.urls import path, re_path
 
 urlpatterns = [
-    path('', views.index),
+    path('', views.index, name='index'),
     path('api/signup', views.user_signup),
     path('api/login', views.user_login),
+    path('api/whoami', views.who_am_i),
     path('api/logout', views.user_logout),
     path('api/getquotes', views.get_quotes),
     path('api/getcollectionids', views.get_collection_ids),
     path('api/getcollectionurls', views.get_collection_urls),
-    
+    re_path(r'.*', views.index),
 ]
