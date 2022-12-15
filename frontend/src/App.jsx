@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import { Flex, Button } from '@chakra-ui/react'
 
+import { getCookie } from '../hooks/utils'
+
 // COMPONENTS
 import LoginModal from '../components/LoginModal'
 import Logout from '../components/Logout'
@@ -25,24 +27,9 @@ function App() {
   const [categories, setCategories] = useState([])
   // RANDOMLY SELECTED PICTURE FROM CURRENT CATEGORY/THEME
   const [pictureUrls, setPictureUrls] = useState('')
-  const [userStatus, setUserStatus] = useState(false)
+  const [userStatus, setUserStatus] = useState(true)
   const [userInfo, setUserInfo] = useState({})
 
-  // CSRF TOKEN
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-          }
-        }
-      }
-    return cookieValue;
-  }
   const csrftoken = getCookie('csrftoken');
   axios.defaults.headers.common["X-CSRFToken"]=csrftoken
 
