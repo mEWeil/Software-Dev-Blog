@@ -31,7 +31,7 @@ export default function LoginModal({ setUserStatus, setUserInfo, userInfo }) {
         as="a" 
         variant="ghost" 
         aria-label="About" 
-        my={5} 
+
         w="100%" 
         onClick={onOpen}>
           Log In

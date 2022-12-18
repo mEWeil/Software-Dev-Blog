@@ -31,7 +31,7 @@ export default function Logout({ setUserStatus }) {
       as="a" 
       variant="ghost" 
       aria-label="About" 
-      my={5} 
+
       w="100%">
         Log Out
     </Button>

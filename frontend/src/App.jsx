@@ -39,10 +39,10 @@ export default function App() {
     <div className="App">
 
       <Flex>
-        <Flex position="fixed" top="1rem" right="1rem" align="center">
+        <Flex border='2px solid black' position="fixed" right="1rem" align="center">
           <Flex>
             <Link to=''>
-              <Button as="a" variant="ghost" aria-label="Home" my={5} w="100%">
+              <Button as="a" variant="ghost" aria-label="Home" w="100%">
                 Home
               </Button>
             </Link>
@@ -58,13 +58,13 @@ export default function App() {
             }
 
             <Link to='/newentry'>
-              <Button as="a" variant="ghost" aria-label="Contact" my={5} w="100%">
+              <Button as="a" variant="ghost" aria-label="Contact" w="100%">
                 New Entry
               </Button>
             </Link>
 
             <Link to='/browseentries'>
-              <Button as="a" variant="ghost" aria-label="Contact" my={5} w="100%">
+              <Button as="a" variant="ghost" aria-label="Contact" w="100%">
                 Browse Entries
               </Button>
             </Link>

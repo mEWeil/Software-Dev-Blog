@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Box, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
+import { Box, Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 import { useGetQuotes, useSendQuote, useGetCollectionIds, useGetPictureUrls, useSendPicture } from '../../hooks/utils'
 
 export default function Home() {
@@ -20,29 +21,39 @@ export default function Home() {
     useGetCollectionIds(setCategories)
   }, [])
 
-  // FINISH RENAMING FUNCTIONS IN RETURN
+  useEffect(() => {
+    useSendQuote(setDisplayQuote, quotes)
+  }, [quotes])
 
   return (
     <>
       <h1>This is the Home Page</h1>    
 
-      {/* <Box>
+      <Box border='2px solid black' width='auto' height='auto' >
           <img src={pictureUrls} alt="pexels image"/>
-          <button onClick={()=>sendQuote(setDisplayQuote, quotes)}>Get Quote</button>
-          <button onClick={()=>sendPicture()}>Get Picture</button> 
+          <button onClick={()=>useSendQuote(setDisplayQuote, quotes)}>Get Quote</button>
+          <button onClick={()=>console.log(categories)}>Get Picture</button> 
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
               Background Categories
             </MenuButton>
             <MenuList>
               {categories.map(category => {
-                <MenuItem>{category.title}</MenuItem>
+                return(
+                <MenuItem onClick={()=>useGetPictureUrls(setPictureUrls, {'id': category.id})} >{category.title}</MenuItem>
+                )
               })}
             </MenuList>
           </Menu>
-          <h3>{displayQuote.q}</h3> 
-          <h4>{displayQuote.a}</h4>
-      </Box> */}
+          {displayQuote ?
+            <>
+              <h3>{displayQuote.q}</h3> 
+              <h4>{displayQuote.a}</h4>
+            </>
+            :
+            <p>Loading...</p>
+            }
+      </Box>
     </>
   )
 }

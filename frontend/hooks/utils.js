@@ -66,9 +66,9 @@ export const useGetCollectionIds = (setCategories) => {
 }
 
 
-export const useGetPictureUrls = () => {
-  axios.get('api/getcollectionurls')
-  .then((response)=>console.log(response))
+export const useGetPictureUrls = (setPictureUrls, data) => {
+  axios.post('api/getcollectionurls', data)
+  .then((response)=>setPictureUrls(response.data.data['media']))
   .catch((error)=>console.log(error))
 }
 

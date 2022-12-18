@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import {useSignup} from '../hooks/utils'
 
 
-export default function LoginModal({ setUserStatus }) {
+export default function SignupModal({ setUserStatus }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate()
 
@@ -31,7 +31,6 @@ export default function LoginModal({ setUserStatus }) {
         as="a" 
         variant="ghost" 
         aria-label="About" 
-        my={5} 
         w="100%" 
         onClick={onOpen}>
           Sign Up

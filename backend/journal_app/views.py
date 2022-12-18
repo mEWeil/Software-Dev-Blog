@@ -75,8 +75,10 @@ def get_collection_ids(request):
     data= json.loads(r.text)
     return JsonResponse({'data': data})
 
+@api_view(["POST"])
 def get_collection_urls(request):
-    r = requests.get('https://api.pexels.com/v1/collections/0uw9odl', headers={'Authorization': os.environ.get('PEXELS_API_KEY')})
+    id = request.data['id']
+    r = requests.get(f'https://api.pexels.com/v1/collections/{id}', headers={'Authorization': os.environ.get('PEXELS_API_KEY')})
     data= json.loads(r.text)
     return JsonResponse({'data': data})
 
