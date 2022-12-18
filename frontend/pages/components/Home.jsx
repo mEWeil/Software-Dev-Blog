@@ -11,12 +11,13 @@ export default function Home() {
   const [displayQuote, setDisplayQuote] = useState({})
   // ARRAY OF OBJECTS BASED ON MY PEXELS COLLECTIONS EX: {title: space, id: 123abc}
   const [categories, setCategories] = useState([])
+  // ARRAY OF 15 OBJECTS FOR PICTURES
+  const [pictureUrls, setPictureUrls] = useState(null)
   // RANDOMLY SELECTED PICTURE FROM CURRENT CATEGORY/THEME
-  const [pictureUrls, setPictureUrls] = useState('')
+  const [displayPicture, setDisplayPicture] = useState('')
 
   // RETRIEVES QUOTE ARRAY ON INITIAL RENDER
   useEffect(() => {
-    console.log('useEffect fired')
     useGetQuotes(setQuotes)
     useGetCollectionIds(setCategories)
   }, [])
@@ -25,14 +26,25 @@ export default function Home() {
     useSendQuote(setDisplayQuote, quotes)
   }, [quotes])
 
+  useEffect(() => {
+    useGetPictureUrls(setPictureUrls, {'id': 'oy45lci'})
+  }, [categories])
+
+  useEffect(() => {
+    pictureUrls ?
+    useSendPicture(setDisplayPicture, pictureUrls)
+    :
+    ''
+  }, [pictureUrls])
+
   return (
     <>
       <h1>This is the Home Page</h1>    
 
       <Box border='2px solid black' width='auto' height='auto' >
-          <img src={pictureUrls} alt="pexels image"/>
-          <button onClick={()=>useSendQuote(setDisplayQuote, quotes)}>Get Quote</button>
-          <button onClick={()=>console.log(categories)}>Get Picture</button> 
+          <img src={displayPicture} alt="pexels image"/>
+          <button onClick={()=>useSendQuote(setDisplayQuote, quotes)}>Refresh Quote</button>
+          <button onClick={()=>useSendPicture(setDisplayPicture, pictureUrls)}>Refresh Picture</button> 
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
               Background Categories

@@ -48,7 +48,6 @@ export const useGetQuotes = (setQuotes) => {
 // CREATES A RANDOM NUMBER AND PULLS THAT INDEX FROM QUOTE ARRAY TO DISPLAY
 export const useSendQuote = (setDisplayQuote, quotes) => {
   let randNum = Math.floor(Math.random()*50);
-  console.log(randNum)
   setDisplayQuote(quotes[randNum])
 }
 
@@ -72,8 +71,9 @@ export const useGetPictureUrls = (setPictureUrls, data) => {
   .catch((error)=>console.log(error))
 }
 
-export const useSendPicture = () => {
-  let randNum = Math.floor(Math.random()*50);
+export const useSendPicture = (setDisplayPicture, pictureUrls) => {
+  let randNum = Math.floor(Math.random()*15);
   console.log(randNum)
-  setDisplayQuote(quotes[randNum])
+  console.log(pictureUrls[randNum].src['original'])
+  setDisplayPicture(pictureUrls[randNum].src['original'])
 }
