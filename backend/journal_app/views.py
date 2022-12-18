@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
 from rest_framework.decorators import api_view
 from .models import User
+from .serializers import UserSerializer, EntrySerializer
 import json, requests
 import os
 
@@ -37,7 +38,8 @@ def user_login(request):
             if user.is_active:
                 try:
                     login(request, user)
-                    return JsonResponse({'status': 'successsfully logged in', 'user': user})
+                    serializer = UserSerializer(user)
+                    return JsonResponse(serializer.data)
                 except Exception as e:
                     print(e)
                     return JsonResponse({'failure': 'failed to log in'})

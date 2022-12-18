@@ -2,25 +2,25 @@ import React from 'react'
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input } from '@chakra-ui/react'
 import { useNavigate } from "react-router-dom"
 
-import {useLogin} from '../hooks/utils'
+import {useSignup} from '../hooks/utils'
 
 
-export default function LoginModal({ setUserStatus, setUserInfo, userInfo }) {
+export default function LoginModal({ setUserStatus }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate()
 
   const onClickHandler = () => {
-    let username = document.getElementById('login-username-input').value
-    let password = document.getElementById('login-password-input').value
-    let data = { 'username': username, 'password': password }
+    let username = document.getElementById('signup-username-input').value
+    let email = document.getElementById('signup-email-input').value
+    let password = document.getElementById('signup-password-input').value
+    let data = { 'username': username, 'email': email, 'password': password }
     try{
-      useLogin(data, setUserInfo)
-      console.log(userInfo)
-      setUserStatus(true) // NEED TO SEPERATE THIS OR MAKE IT CONDITIONAL ON SUCCESSFUL LOGIN
-      navigate('/')
+      useSignup(data)
+      // setUserStatus(true)
+      // navigate('/')
     }
     catch(err){
-      console.log('login failed')
+      console.log('signup failed')
       console.log(err)
     }
   } 
@@ -34,25 +34,29 @@ export default function LoginModal({ setUserStatus, setUserInfo, userInfo }) {
         my={5} 
         w="100%" 
         onClick={onOpen}>
-          Log In
+          Sign Up
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
           <ModalContent>
 
-            <ModalHeader>Log In</ModalHeader>
+            <ModalHeader>Sign Up</ModalHeader>
 
             <ModalCloseButton />
 
             <ModalBody>
               <FormControl>
                 <FormLabel>Username:</FormLabel>
-                  <Input type='text' id='login-username-input' />
+                  <Input type='text' id='signup-username-input' />
+                  {/* <FormHelperText>This will be your personal identifier.</FormHelperText>
+                  <FormErrorMessage>Please enter a valid user name.</FormErrorMessage> */}
+                <FormLabel>Email:</FormLabel>
+                  <Input type='email' id='signup-email-input' />
                   {/* <FormHelperText>This will be your personal identifier.</FormHelperText>
                   <FormErrorMessage>Please enter a valid user name.</FormErrorMessage> */}
                 <FormLabel>Password:</FormLabel>
-                  <Input type='password' id='login-password-input' />
+                  <Input type='password' id='signup-password-input' />
                   {/* <FormHelperText>We'll never share your email.</FormHelperText>
                   <FormErrorMessage>Please enter a valid email.</FormErrorMessage> */}
                   <Button 
@@ -75,3 +79,4 @@ export default function LoginModal({ setUserStatus, setUserInfo, userInfo }) {
     </>
   )
 }
+

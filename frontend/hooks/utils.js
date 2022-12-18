@@ -1,14 +1,23 @@
 import axios from 'axios'
 
-export function useLogin (data){
+// LOGIN
+export function useLogin (data, setUserInfo){
   event.preventDefault()
   axios.post('api/login', data)
+    .then((response)=>setUserInfo(response.data))
+    .catch((error)=>console.log(error))
+}
+
+// LOGOUT
+export function useLogout(data){
+  axios.post('api/logout')
     .then((response)=>console.log(response))
     .catch((error)=>console.log(error))
 }
 
-export function useLogout(data){
-  axios.post('api/logout')
+// SIGNUP
+export function useSignup(data){
+  axios.post('api/signup', data)
     .then((response)=>console.log(response))
     .catch((error)=>console.log(error))
 }
@@ -29,15 +38,42 @@ export function getCookie(name) {
   return cookieValue;
 }
 
+// SENDS GET REQUEST > DJANGO > API TO RECEIVE QUOTE ARRAY
+export const useGetQuotes = (setQuotes) => {
+  axios.get('api/getquotes')
+  .then((response)=>setQuotes(response.data.data))
+  .catch((error)=>console.log(error))
+}
 
-// const userLogin = () => {
-//   event.preventDefault()
-//   axios.post('api/login', {
-//     'username': username,
-//     'password': password
-//   })
-//     .then((response)=>console.log(response))
-//     .then(()=>setUserStatus(true))
-//     .then(()=>navigate('/'))
-//     .catch((error)=>console.log(error))
-// }
+// CREATES A RANDOM NUMBER AND PULLS THAT INDEX FROM QUOTE ARRAY TO DISPLAY
+export const useSendQuote = (setDisplayQuote, quotes) => {
+  let randNum = Math.floor(Math.random()*50);
+  console.log(randNum)
+  setDisplayQuote(quotes[randNum])
+}
+
+// SENDS GET REQUEST > DJANGO > PEXELS TO RECIEVE TITLES AND IDS OF MY COLLECTIONS
+export const useGetCollectionIds = (setCategories) => {
+  axios.get('api/getcollectionids')
+    .then((response)=>{
+      let collections = response.data.data.collections;
+      let collectionArr = [];
+      collections.map(collection=>{
+        collectionArr.push({title: collection.title, id: collection.id})
+      })
+      setCategories(collectionArr)})
+    .catch((error)=>console.log(error))
+}
+
+
+export const useGetPictureUrls = () => {
+  axios.get('api/getcollectionurls')
+  .then((response)=>console.log(response))
+  .catch((error)=>console.log(error))
+}
+
+export const useSendPicture = () => {
+  let randNum = Math.floor(Math.random()*50);
+  console.log(randNum)
+  setDisplayQuote(quotes[randNum])
+}
