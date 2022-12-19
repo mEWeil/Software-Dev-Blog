@@ -24,6 +24,7 @@ export default function Logout({ setUserInfo }) {
   return (
     <Button 
       onClick={()=>onClickHandler()}
+      colorScheme='blue'
       as="a" 
       variant="ghost" 
       aria-label="About" 

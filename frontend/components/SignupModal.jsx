@@ -1,17 +1,15 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Box } from '@chakra-ui/react'
 
 import {useSignup} from '../hooks/utils'
 
 
-export default function SignupModal({}) {
+export default function SignupModal() {
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const onClickHandler = () => {
-    let username = document.getElementById('signup-username-input').value
-    let email = document.getElementById('signup-email-input').value
-    let password = document.getElementById('signup-password-input').value
-    let data = { 'username': username, 'email': email, 'password': password }
+  const onSubmit = (data) => {
     try{
       useSignup(data)
     }
@@ -25,6 +23,7 @@ export default function SignupModal({}) {
     <Box>
       <Button 
         as="a" 
+        colorScheme='blue'
         variant="ghost" 
         aria-label="About" 
         w="100%" 
@@ -41,29 +40,23 @@ export default function SignupModal({}) {
             <ModalCloseButton />
 
             <ModalBody>
-              <FormControl>
-                <FormLabel>Username:</FormLabel>
-                  <Input type='text' id='signup-username-input' />
-                  {/* <FormHelperText>This will be your personal identifier.</FormHelperText>
-                  <FormErrorMessage>Please enter a valid user name.</FormErrorMessage> */}
-                <FormLabel>Email:</FormLabel>
-                  <Input type='email' id='signup-email-input' />
-                  {/* <FormHelperText>This will be your personal identifier.</FormHelperText>
-                  <FormErrorMessage>Please enter a valid user name.</FormErrorMessage> */}
-                <FormLabel>Password:</FormLabel>
-                  <Input type='password' id='signup-password-input' />
-                  {/* <FormHelperText>We'll never share your email.</FormHelperText>
-                  <FormErrorMessage>Please enter a valid email.</FormErrorMessage> */}
-                  <Button 
-                    onClick={()=>onClickHandler()}
-                    as="a" 
-                    variant="ghost" 
-                    aria-label="About" 
-                    my={5} 
-                    w="100%">
-                      Submit
-                  </Button>
-              </FormControl>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <FormControl>
+                  <FormLabel>Username:</FormLabel>
+                    <Input type='text' id='signup-username' {...register('username', {
+                      required: 'Username is required'
+                    })} />
+                  <FormLabel>Email:</FormLabel>
+                    <Input type='email' id='signup-email' {...register('email', {
+                      required: 'Email is required'
+                    })} />
+                  <FormLabel>Password:</FormLabel>
+                    <Input type='password' id='signup-password' {...register('password', {
+                      required: 'Password is required'
+                    })} />
+                    <Input type='submit' />
+                </FormControl>
+              </form>
             </ModalBody>
 
             <ModalFooter>

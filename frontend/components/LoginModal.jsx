@@ -1,16 +1,15 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Box } from '@chakra-ui/react'
 
 import {useLogin} from '../hooks/utils'
 
 
 export default function LoginModal({ setUserInfo }) {
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const onClickHandler = () => {
-    let username = document.getElementById('login-username-input').value
-    let password = document.getElementById('login-password-input').value
-    let data = { 'username': username, 'password': password }
+  const onSubmit = (data) => {
     try{
       useLogin(data, setUserInfo)
     }
@@ -26,7 +25,7 @@ export default function LoginModal({ setUserInfo }) {
         as="a" 
         variant="ghost" 
         aria-label="About" 
-
+        colorScheme='blue'
         w="100%" 
         onClick={onOpen}>
           Log In
@@ -41,25 +40,19 @@ export default function LoginModal({ setUserInfo }) {
             <ModalCloseButton />
 
             <ModalBody>
-              <FormControl>
-                <FormLabel>Username:</FormLabel>
-                  <Input type='text' id='login-username-input' />
-                  {/* <FormHelperText>This will be your personal identifier.</FormHelperText>
-                  <FormErrorMessage>Please enter a valid user name.</FormErrorMessage> */}
-                <FormLabel>Password:</FormLabel>
-                  <Input type='password' id='login-password-input' />
-                  {/* <FormHelperText>We'll never share your email.</FormHelperText>
-                  <FormErrorMessage>Please enter a valid email.</FormErrorMessage> */}
-                  <Button 
-                    onClick={()=>onClickHandler()}
-                    as="a" 
-                    variant="ghost" 
-                    aria-label="About" 
-                    my={5} 
-                    w="100%">
-                      Submit
-                  </Button>
-              </FormControl>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <FormControl>
+                  <FormLabel>Username:</FormLabel>
+                    <Input type='text' id='login-username' {...register('username', {
+                      required: 'Username is required'
+                    })} />
+                  <FormLabel>Password:</FormLabel>
+                    <Input type='password' id='login-password' {...register('password', {
+                      required: 'Password is required'
+                    })} />
+                    <Input type='submit' />
+                </FormControl>
+              </form>
             </ModalBody>
 
             <ModalFooter>
