@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import {useLogin} from '../hooks/utils'
 
 
-export default function LoginModal({ setUserStatus, setUserInfo, userInfo }) {
+export default function LoginModal({ setUserInfo }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate()
 
@@ -15,8 +15,6 @@ export default function LoginModal({ setUserStatus, setUserInfo, userInfo }) {
     let data = { 'username': username, 'password': password }
     try{
       useLogin(data, setUserInfo)
-      console.log(userInfo)
-      setUserStatus(true) // NEED TO SEPERATE THIS OR MAKE IT CONDITIONAL ON SUCCESSFUL LOGIN
       navigate('/')
     }
     catch(err){

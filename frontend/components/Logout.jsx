@@ -5,7 +5,7 @@ import axios from 'axios'
 
 import { useLogout, getCookie } from '../hooks/utils'
 
-export default function Logout({ setUserStatus }) {
+export default function Logout({ setUserInfo }) {
   const navigate = useNavigate()
 
   const csrftoken = getCookie('csrftoken');
@@ -14,8 +14,7 @@ export default function Logout({ setUserStatus }) {
   const onClickHandler = (data) => {
     axios.defaults.headers.common["X-CSRFToken"]=csrftoken
     try{
-      
-      useLogout(data)
+      useLogout(data, setUserInfo)
       setUserStatus(false)
       navigate('/')
     }

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import {useSignup} from '../hooks/utils'
 
 
-export default function SignupModal({ setUserStatus }) {
+export default function SignupModal({}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const navigate = useNavigate()
 

@@ -43,8 +43,8 @@ export default function Home() {
 
       <Box border='2px solid black' width='auto' height='auto' >
           <img src={displayPicture} alt="pexels image"/>
-          <button onClick={()=>useSendQuote(setDisplayQuote, quotes)}>Refresh Quote</button>
-          <button onClick={()=>useSendPicture(setDisplayPicture, pictureUrls)}>Refresh Picture</button> 
+          <Button onClick={()=>useSendQuote(setDisplayQuote, quotes)}>Refresh Quote</Button>
+          <Button onClick={()=>useSendPicture(setDisplayPicture, pictureUrls)}>Refresh Picture</Button> 
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
               Background Categories

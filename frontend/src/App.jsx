@@ -17,7 +17,6 @@ import NewEntry from '../pages/components/NewEntry'
 import BrowseEntries from '../pages/components/BrowseEntries'
 
 export default function App() {
-  const [userStatus, setUserStatus] = useState(false)
   const [userInfo, setUserInfo] = useState(null)
 
   const csrftoken = getCookie('csrftoken');
@@ -47,13 +46,13 @@ export default function App() {
               </Button>
             </Link>
 
-            {userStatus ?
-              <Logout setUserStatus={setUserStatus} />
+            {userInfo ?
+              <Logout setUserInfo={setUserInfo} />
             :
             <>
-              <LoginModal setUserStatus={setUserStatus} setUserInfo={setUserInfo} userInfo={userInfo} />
+              <LoginModal setUserInfo={setUserInfo} />
 
-              <SignupModal setUserStatus={setUserStatus} />
+              <SignupModal />
             </>
             }
 

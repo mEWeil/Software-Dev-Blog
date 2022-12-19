@@ -9,9 +9,10 @@ export function useLogin (data, setUserInfo){
 }
 
 // LOGOUT
-export function useLogout(data){
+export function useLogout(data, setUserInfo){
   axios.post('api/logout')
     .then((response)=>console.log(response))
+    .then (()=>setUserInfo(null))
     .catch((error)=>console.log(error))
 }
 
