@@ -54,15 +54,8 @@ def user_logout(request):
         logout(request)
         return JsonResponse({'status': 'successfully logged out'})
 
-@api_view(["GET"])
-def who_am_i(request):
-    if request.user.is_authenticated:
-        return JsonResponse({
-            'username': request.user.username,
-            'email': request.user.email
-        })
-    else:
-        return JsonResponse({'user':None})
+def create_post(request):
+    pass
 
 # 3RD PARTY API VIEWS
 def get_quotes(request):

@@ -6,7 +6,12 @@ import {useLogin} from '../hooks/utils'
 
 
 export default function LoginModal({ setUserInfo }) {
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm()
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
+    defaultValues: {
+      username: '',
+      password: ''
+    }
+  })
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const onSubmit = (data) => {
@@ -41,17 +46,25 @@ export default function LoginModal({ setUserInfo }) {
 
             <ModalBody>
               <form onSubmit={handleSubmit(onSubmit)}>
-                <FormControl>
+                <FormControl isInvalid={errors.username}>
                   <FormLabel>Username:</FormLabel>
                     <Input type='text' id='login-username' {...register('username', {
                       required: 'Username is required'
                     })} />
+                    <FormErrorMessage>
+                      {errors.username && errors.username.message}
+                    </FormErrorMessage>
+                </FormControl>
+                <FormControl isInvalid={errors.password}>
                   <FormLabel>Password:</FormLabel>
                     <Input type='password' id='login-password' {...register('password', {
                       required: 'Password is required'
                     })} />
-                    <Input type='submit' />
+                    <FormErrorMessage>
+                      {errors.password && errors.password.message}
+                    </FormErrorMessage>
                 </FormControl>
+                    <Input type='submit' />
               </form>
             </ModalBody>
 

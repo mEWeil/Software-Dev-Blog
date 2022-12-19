@@ -2,11 +2,13 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Box, Text, FormControl, FormLabel, FormErrorMessage, FormHelperText, Textarea, Input } from '@chakra-ui/react'
 
+import { createPost } from '../../hooks/utils'
+
 export default function NewEntry() {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm()
 
   const onSubmit = (data) => {
-    console.log(data)
+    createPost(data)
   }
 
   return (

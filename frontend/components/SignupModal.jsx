@@ -6,7 +6,13 @@ import {useSignup} from '../hooks/utils'
 
 
 export default function SignupModal() {
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm()
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
+    defaultValues: {
+      username: '',
+      email: '',
+      password: ''
+    }
+  })
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const onSubmit = (data) => {
@@ -41,19 +47,32 @@ export default function SignupModal() {
 
             <ModalBody>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <FormControl>
+                <FormControl isInvalid={errors.username}>
                   <FormLabel>Username:</FormLabel>
                     <Input type='text' id='signup-username' {...register('username', {
                       required: 'Username is required'
                     })} />
+                    <FormErrorMessage>
+                      {errors.username && errors.username.message}
+                    </FormErrorMessage>
+                  </FormControl>
+                <FormControl isInvalid={errors.email}>
                   <FormLabel>Email:</FormLabel>
                     <Input type='email' id='signup-email' {...register('email', {
                       required: 'Email is required'
                     })} />
+                    <FormErrorMessage>
+                      {errors.email && errors.email.message}
+                    </FormErrorMessage>
+                </FormControl>
+                <FormControl isInvalid={errors.password}>
                   <FormLabel>Password:</FormLabel>
                     <Input type='password' id='signup-password' {...register('password', {
                       required: 'Password is required'
                     })} />
+                    <FormErrorMessage>
+                      {errors.password && errors.password.message}
+                    </FormErrorMessage>
                     <Input type='submit' />
                 </FormControl>
               </form>

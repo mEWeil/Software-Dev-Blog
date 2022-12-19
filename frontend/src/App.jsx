@@ -22,13 +22,6 @@ export default function App() {
   const csrftoken = getCookie('csrftoken');
   axios.defaults.headers.common["X-CSRFToken"]=csrftoken
 
-  // const whoAmI = () => {
-  //   axios.get('api/whoami')
-  //     .then(console.log('whoAmI fired'))
-  //     .then(response => setUserInfo(response.data))
-  //     .catch(error => console.log(error))
-  // }
-
   // useEffect(()=>{
   //   console.log('useEffect fired')
   //   console.log('userInfo: ', userInfo)
