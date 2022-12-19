@@ -1,13 +1,11 @@
 import React from 'react'
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input } from '@chakra-ui/react'
-import { useNavigate } from "react-router-dom"
 
 import {useSignup} from '../hooks/utils'
 
 
 export default function SignupModal({}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const navigate = useNavigate()
 
   const onClickHandler = () => {
     let username = document.getElementById('signup-username-input').value
@@ -16,8 +14,6 @@ export default function SignupModal({}) {
     let data = { 'username': username, 'email': email, 'password': password }
     try{
       useSignup(data)
-      // setUserStatus(true)
-      // navigate('/')
     }
     catch(err){
       console.log('signup failed')

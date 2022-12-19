@@ -1,13 +1,11 @@
 import React from 'react'
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input } from '@chakra-ui/react'
-import { useNavigate } from "react-router-dom"
 
 import {useLogin} from '../hooks/utils'
 
 
 export default function LoginModal({ setUserInfo }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const navigate = useNavigate()
 
   const onClickHandler = () => {
     let username = document.getElementById('login-username-input').value
@@ -15,7 +13,6 @@ export default function LoginModal({ setUserInfo }) {
     let data = { 'username': username, 'password': password }
     try{
       useLogin(data, setUserInfo)
-      navigate('/')
     }
     catch(err){
       console.log('login failed')
