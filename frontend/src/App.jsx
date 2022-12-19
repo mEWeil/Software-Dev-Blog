@@ -2,7 +2,7 @@ import './App.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
-import { Flex, Button } from '@chakra-ui/react' 
+import { Flex, Button, Text, Box } from '@chakra-ui/react' 
 
 import { getCookie } from '../hooks/utils'
 
@@ -35,7 +35,7 @@ export default function App() {
   // }, [userStatus])
 
   return (
-    <div className="App">
+    <Box className="App">
 
       <Flex>
         <Flex border='2px solid black' position="fixed" right="1rem" align="center">
@@ -74,9 +74,9 @@ export default function App() {
 
 
         {userInfo ?
-          <h2>Welcome {userInfo['username']}!</h2>
+          <Text fontSize='xl' >Welcome {userInfo['username']}!</Text>
           :
-          <h2>Please log in.</h2>}
+          <Text fontSize='xl' >Please log in.</Text>}
 
       <Routes>
         <Route path='' element={<Home/>} />
@@ -84,6 +84,6 @@ export default function App() {
         <Route path='browseentries/' element={<BrowseEntries/>} />
       </Routes>
         
-    </div>
+    </Box>
   )
 }

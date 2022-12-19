@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Box, Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react'
+import { Box, Menu, MenuButton, MenuList, MenuItem, Button, Text, Image } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { useGetQuotes, useSendQuote, useGetCollectionIds, useGetPictureUrls, useSendPicture } from '../../hooks/utils'
 
@@ -38,11 +38,11 @@ export default function Home() {
   }, [pictureUrls])
 
   return (
-    <>
-      <h1>This is the Home Page</h1>    
+    <Box>
+      <Text fontSize='xl' >This is the Home Page</Text>    
 
       <Box border='2px solid black' width='auto' height='auto' >
-          <img src={displayPicture} alt="pexels image"/>
+          <Image src={displayPicture} alt="pexels image"/>
           <Button onClick={()=>useSendQuote(setDisplayQuote, quotes)}>Refresh Quote</Button>
           <Button onClick={()=>useSendPicture(setDisplayPicture, pictureUrls)}>Refresh Picture</Button> 
           <Menu>
@@ -58,14 +58,14 @@ export default function Home() {
             </MenuList>
           </Menu>
           {displayQuote ?
-            <>
-              <h3>{displayQuote.q}</h3> 
-              <h4>{displayQuote.a}</h4>
-            </>
+            <Box>
+              <Text fontSize='2xl'>{displayQuote.q}</Text> 
+              <Text fontSize='xl'>{displayQuote.a}</Text>
+            </Box>
             :
-            <p>Loading...</p>
+            <Text fontSize='xl'>Loading...</Text>
             }
       </Box>
-    </>
+    </Box>
   )
 }

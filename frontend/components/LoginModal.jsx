@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input } from '@chakra-ui/react'
+import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Box } from '@chakra-ui/react'
 
 import {useLogin} from '../hooks/utils'
 
@@ -21,7 +21,7 @@ export default function LoginModal({ setUserInfo }) {
   } 
 
   return (
-    <>
+    <Box>
       <Button 
         as="a" 
         variant="ghost" 
@@ -67,6 +67,6 @@ export default function LoginModal({ setUserInfo }) {
 
           </ModalContent>   
       </Modal>  
-    </>
+    </Box>
   )
 }
