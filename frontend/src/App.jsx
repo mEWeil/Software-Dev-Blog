@@ -10,6 +10,7 @@ import { getCookie } from '../hooks/utils'
 import LoginModal from '../components/LoginModal'
 import SignupModal from '../components/SignupModal'
 import Logout from '../components/Logout'
+import PrivateRoutes from '../pages/components/PrivateRoutes'
 
 // PAGES
 import Home from '../pages/components/Home'
@@ -73,8 +74,10 @@ export default function App() {
 
       <Routes>
         <Route path='' element={<Home/>} />
-        <Route path='newentry/' element={<NewEntry/>} />
-        <Route path='browseentries/' element={<BrowseEntries/>} />
+        <Route element={<PrivateRoutes userInfo={userInfo}/>}>
+          <Route path='newentry/' element={<NewEntry/>} />
+          <Route path='browseentries/' element={<BrowseEntries/>} />
+        </Route>
       </Routes>
         
     </Box>

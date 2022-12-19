@@ -16,20 +16,25 @@ export default function NewEntry() {
       <Text fontSize='xl'>This is the New Entry Page</Text>
       <Box>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormControl isInvalid={errors.name}>
+          <FormControl isInvalid={errors.postTitle}>
             <FormLabel>Post Title: </FormLabel>
-              <Input type='text' {...register('post-title', {
+              <Input type='text' {...register('postTitle', {
                 required: 'Post title is required'
               })}/>
+              <FormErrorMessage>
+                {errors.postTitle && errors.postTitle.message}
+              </FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={errors.post}>
             <FormLabel>Post: </FormLabel>
               <Textarea {...register('post', {
                 required: 'Post content is required.'
               })}/>
-            <Input type='submit' />
             <FormErrorMessage>
-              {errors.name && errors.name.message}
+              {errors.post && errors.post.message}
             </FormErrorMessage>
           </FormControl>
+          <Input type='submit' />
         </form>
       </Box>
     </Box>

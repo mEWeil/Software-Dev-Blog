@@ -4,6 +4,8 @@
 * edit post view
 * delete post view
 * styling
+* some kind of alert for trying to access private routes before logging in
+* some kind of cookie/getter setter so userinfo persists between refresh
 
 # STRETCH GOAL
 * comments model and functionality
