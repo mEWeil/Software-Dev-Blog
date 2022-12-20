@@ -83,8 +83,13 @@ export const useSendPicture = (setDisplayPicture, pictureUrls) => {
 }
 
 export const createPost = (data) => {
-  console.log('createPost fxn blah')
   axios.post('api/createpost', data)
     .then(response=>console.log(response))
+    .catch(error=>console.log(error))
+}
+
+export const getPosts = (setPosts) => {
+  axios.get('api/getposts')
+    .then(response=>setPosts(response.data))
     .catch(error=>console.log(error))
 }

@@ -18,7 +18,7 @@ import NewEntry from '../pages/components/NewEntry'
 import BrowseEntries from '../pages/components/BrowseEntries'
 
 export default function App() {
-  const [userInfo, setUserInfo] = useState(null)
+  const [userInfo, setUserInfo] = useState(true)
 
   const csrftoken = getCookie('csrftoken');
   axios.defaults.headers.common["X-CSRFToken"]=csrftoken

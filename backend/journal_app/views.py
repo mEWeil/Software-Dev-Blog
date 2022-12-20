@@ -3,7 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
 from rest_framework.decorators import api_view
-from .models import User
+from .models import User, Entry
 from .serializers import UserSerializer, EntrySerializer
 import json, requests
 import os
@@ -51,8 +51,20 @@ def user_logout(request):
     logout(request)
     return JsonResponse({'status': 'successfully logged out'})
 
+@api_view(["POST"])
 def create_post(request):
-    pass
+    title = request.data['postTitle']
+    post = request.data['post']
+    user = request.user
+    entry = Entry(title=title, entry=post, user=user)
+    entry.save()
+    return JsonResponse({'status': 'entry created'})
+
+@api_view(["GET"])
+def get_posts(request):
+    entry_list = list(Entry.objects.all())
+    serializer = EntrySerializer(entry_list, many=True)
+    return JsonResponse(serializer.data, safe=False)
 
 # 3RD PARTY API VIEWS
 def get_quotes(request):
