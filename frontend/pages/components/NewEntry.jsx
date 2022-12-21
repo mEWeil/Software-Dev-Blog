@@ -5,10 +5,11 @@ import { Box, Text, FormControl, FormLabel, FormErrorMessage, FormHelperText, Te
 import { createPost } from '../../hooks/utils'
 
 export default function NewEntry() {
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm()
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm()
 
   const onSubmit = (data) => {
     createPost(data)
+    reset()
   }
 
   return (
