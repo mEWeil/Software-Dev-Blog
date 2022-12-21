@@ -18,7 +18,7 @@ import NewEntry from '../pages/components/NewEntry'
 import BrowseEntries from '../pages/components/BrowseEntries'
 
 export default function App() {
-  const [userInfo, setUserInfo] = useState(true)
+  const [userInfo, setUserInfo] = useState(false)
 
   const csrftoken = getCookie('csrftoken');
   axios.defaults.headers.common["X-CSRFToken"]=csrftoken
@@ -41,7 +41,21 @@ export default function App() {
             </Link>
 
             {userInfo ?
-              <Logout setUserInfo={setUserInfo} />
+              <>
+                <Logout setUserInfo={setUserInfo} />
+
+                <Link to='/newentry'>
+                  <Button as="a" colorScheme='blue' variant="ghost" aria-label="Contact" w="100%">
+                    New Entry
+                  </Button>
+                </Link>
+
+                <Link to='/browseentries'>
+                  <Button as="a" colorScheme='blue' variant="ghost" aria-label="Contact" w="100%">
+                    Browse Entries
+                  </Button>
+                </Link>
+              </>
             :
             <>
               <LoginModal setUserInfo={setUserInfo} />
@@ -50,17 +64,7 @@ export default function App() {
             </>
             }
 
-            <Link to='/newentry'>
-              <Button as="a" colorScheme='blue' variant="ghost" aria-label="Contact" w="100%">
-                New Entry
-              </Button>
-            </Link>
-
-            <Link to='/browseentries'>
-              <Button as="a" colorScheme='blue' variant="ghost" aria-label="Contact" w="100%">
-                Browse Entries
-              </Button>
-            </Link>
+            
 
           </Flex>
         </Flex>
