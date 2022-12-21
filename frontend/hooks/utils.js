@@ -93,3 +93,12 @@ export const getPosts = (setPosts) => {
     .then(response=>setPosts(response.data))
     .catch(error=>console.log(error))
 }
+
+export const deletePost = (postId, setPosts) => {
+  axios.delete('api/deletepost/'+postId+'')
+    .then(response=>{
+      console.log(response);
+      getPosts(setPosts);
+      })
+    .catch(error=>console.log(error))
+}

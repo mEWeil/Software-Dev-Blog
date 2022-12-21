@@ -66,7 +66,15 @@ def get_posts(request):
     serializer = EntrySerializer(entry_list, many=True)
     return JsonResponse(serializer.data, safe=False)
 
-# 3RD PARTY API VIEWS
+@api_view(['DELETE'])
+def delete_post(request, post_id):
+    post = Entry.objects.get(pk=post_id)
+    post.delete()
+    return JsonResponse({'Status': 'deletion successful'})
+
+"""
+3RD PARTY API VIEWS
+"""
 def get_quotes(request):
     r = requests.get('https://zenquotes.io/api/quotes')
     data = json.loads(r.text)

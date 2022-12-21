@@ -1,10 +1,11 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { Box, Text } from '@chakra-ui/react'
-import { DeleteIcon } from '@chakra-ui/icons'
-import { Card, CardHeader, CardBody, CardFooter, IconButton } from '@chakra-ui/react'
+
+import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
 
 import { getPosts } from '../../hooks/utils'
+import DeleteAlert from '../../components/DeleteAlert'
 
 export default function BrowseEntries() {
   const [posts, setPosts] = useState([])
@@ -21,7 +22,8 @@ export default function BrowseEntries() {
           <Card>
             <CardHeader>
               <Text fontSize='xl'>{post.title}</Text>
-              <IconButton aria-label='Delete' icon={<DeleteIcon />} />
+              <Text fontSize='lg'>{post.id}</Text>
+              <DeleteAlert postId={post.id} setPosts={setPosts}/>
             </CardHeader>
             <CardBody>
               <Text fontSize='lg'>{post.entry}</Text>
