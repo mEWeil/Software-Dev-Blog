@@ -82,20 +82,33 @@ export const useSendPicture = (setDisplayPicture, pictureUrls) => {
   setDisplayPicture(pictureUrls[randNum].src['original'])
 }
 
+// CREATES NEW POST
 export const createPost = (data) => {
   axios.post('api/createpost', data)
     .then(response=>console.log(response))
     .catch(error=>console.log(error))
 }
 
+// GETS ALL POSTS TO DISPLAY
 export const getPosts = (setPosts) => {
   axios.get('api/getposts')
     .then(response=>setPosts(response.data))
     .catch(error=>console.log(error))
 }
 
+// DELETES SPECIFIED POST
 export const deletePost = (postId, setPosts) => {
   axios.delete('api/deletepost/'+postId+'')
+    .then(response=>{
+      console.log(response);
+      getPosts(setPosts);
+      })
+    .catch(error=>console.log(error))
+}
+
+// UPDATES SPECIFIED POST
+export const updatePost = (postId, data, setPosts) => {
+  axios.put('api/updatepost/'+postId+'', data)
     .then(response=>{
       console.log(response);
       getPosts(setPosts);

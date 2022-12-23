@@ -72,6 +72,16 @@ def delete_post(request, post_id):
     post.delete()
     return JsonResponse({'Status': 'deletion successful'})
 
+@api_view(['PUT'])
+def update_post(request, post_id):
+    entry = Entry.objects.get(pk=post_id)
+    print(request.data)
+    serializer = EntrySerializer(entry, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return JsonResponse({'success': True})
+    print(serializer.errors)
+    return JsonResponse({'success': False})
 """
 3RD PARTY API VIEWS
 """

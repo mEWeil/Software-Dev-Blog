@@ -9,6 +9,7 @@ urlpatterns = [
     path('api/createpost', views.create_post),
     path('api/getposts', views.get_posts),
     path('api/deletepost/<int:post_id>', views.delete_post),
+    path('api/updatepost/<int:post_id>', views.update_post),
     path('api/getquotes', views.get_quotes),
     path('api/getcollectionids', views.get_collection_ids),
     path('api/getcollectionurls', views.get_collection_urls),

@@ -15,5 +15,5 @@ class Entry(models.Model):
   edited = models.DateTimeField(auto_now=True, blank=True)
   entry = models.TextField()
   favorite = models.BooleanField(default=False)
-  entrytype = models.CharField(max_length=50)
+  entrytype = models.CharField(max_length=50, blank=True)
   user = models.ForeignKey(User, on_delete=models.CASCADE)

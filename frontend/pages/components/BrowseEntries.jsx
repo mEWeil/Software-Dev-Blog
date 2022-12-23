@@ -1,13 +1,12 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { Box, Text } from '@chakra-ui/react'
-
-import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
+import { Box, Text, Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
 
 import { getPosts } from '../../hooks/utils'
 import DeleteAlert from '../../components/DeleteAlert'
+import EditModal from '../../components/EditModal'
 
-export default function BrowseEntries() {
+export default function BrowseEntries({ userInfo }) {
   const [posts, setPosts] = useState([])
 
   useEffect(()=>{
@@ -24,6 +23,7 @@ export default function BrowseEntries() {
               <Text fontSize='xl'>{post.title}</Text>
               <Text fontSize='lg'>{post.id}</Text>
               <DeleteAlert postId={post.id} setPosts={setPosts}/>
+              <EditModal {...post} setPosts={setPosts} userInfo={userInfo}/>
             </CardHeader>
             <CardBody>
               <Text fontSize='lg'>{post.entry}</Text>

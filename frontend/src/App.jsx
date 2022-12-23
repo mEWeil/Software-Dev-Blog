@@ -80,7 +80,7 @@ export default function App() {
         <Route path='' element={<Home/>} />
         <Route element={<PrivateRoutes userInfo={userInfo}/>}>
           <Route path='newentry/' element={<NewEntry/>} />
-          <Route path='browseentries/' element={<BrowseEntries/>} />
+          <Route path='browseentries/' element={<BrowseEntries userInfo={userInfo}/>} />
         </Route>
       </Routes>
         
