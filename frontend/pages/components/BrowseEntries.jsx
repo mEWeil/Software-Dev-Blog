@@ -21,9 +21,14 @@ export default function BrowseEntries({ userInfo }) {
           <Card>
             <CardHeader>
               <Text fontSize='xl'>{post.title}</Text>
-              <Text fontSize='lg'>{post.id}</Text>
-              <DeleteAlert postId={post.id} setPosts={setPosts}/>
-              <EditModal {...post} setPosts={setPosts} userInfo={userInfo}/>
+              <Text fontSize='lg'>{post.user}</Text>
+              {post.user === userInfo.id ?
+              <>
+                <DeleteAlert postId={post.id} setPosts={setPosts}/>
+                <EditModal {...post} setPosts={setPosts} userInfo={userInfo}/>
+              </>
+              :
+              ''}
             </CardHeader>
             <CardBody>
               <Text fontSize='lg'>{post.entry}</Text>

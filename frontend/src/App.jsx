@@ -23,11 +23,6 @@ export default function App() {
   const csrftoken = getCookie('csrftoken');
   axios.defaults.headers.common["X-CSRFToken"]=csrftoken
 
-  // useEffect(()=>{
-  //   console.log('useEffect fired')
-  //   console.log('userInfo: ', userInfo)
-  // }, [userStatus])
-
   return (
     <Box className="App">
 
