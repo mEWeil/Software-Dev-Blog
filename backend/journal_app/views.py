@@ -54,9 +54,10 @@ def user_logout(request):
 @api_view(["POST"])
 def create_post(request):
     title = request.data['postTitle']
+    entrytype = request.data['postTopic']
     post = request.data['post']
     user = request.user
-    entry = Entry(title=title, entry=post, user=user)
+    entry = Entry(title=title, entrytype=entrytype, entry=post, user=user)
     entry.save()
     return JsonResponse({'status': 'entry created'})
 

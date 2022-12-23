@@ -26,6 +26,15 @@ export default function NewEntry() {
                 {errors.postTitle && errors.postTitle.message}
               </FormErrorMessage>
           </FormControl>
+          <FormControl isInvalid={errors.postTitle}>
+            <FormLabel>Post Topic: </FormLabel>
+              <Input type='text' {...register('postTopic', {
+                required: 'Post topic is required'
+              })}/>
+              <FormErrorMessage>
+                {errors.postTitle && errors.postTopic.message}
+              </FormErrorMessage>
+          </FormControl>
           <FormControl isInvalid={errors.post}>
             <FormLabel>Post: </FormLabel>
               <Textarea {...register('post', {
