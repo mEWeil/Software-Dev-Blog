@@ -16,4 +16,11 @@ class Entry(models.Model):
   entry = models.TextField()
   favorite = models.BooleanField(default=False)
   entrytype = models.CharField(max_length=50, blank=True)
+  author = models.CharField(max_length=20, default='')
   user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Comment(models.Model):
+  comment = models.TextField()
+  author = models.CharField(max_length=20, default='')
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
+  entry = models.ForeignKey(Entry, on_delete=models.CASCADE)

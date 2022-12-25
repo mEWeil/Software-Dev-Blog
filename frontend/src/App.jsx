@@ -74,7 +74,7 @@ export default function App() {
       <Routes>
         <Route path='' element={<Home/>} />
         <Route element={<PrivateRoutes userInfo={userInfo}/>}>
-          <Route path='newentry/' element={<NewEntry/>} />
+          <Route path='newentry/' element={<NewEntry userInfo={userInfo}/>} />
           <Route path='browseentries/' element={<BrowseEntries userInfo={userInfo}/>} />
         </Route>
       </Routes>

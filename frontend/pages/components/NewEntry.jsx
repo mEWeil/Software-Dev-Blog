@@ -4,13 +4,19 @@ import { Box, Text, FormControl, FormLabel, FormErrorMessage, FormHelperText, Te
 
 import { createPost } from '../../hooks/utils'
 
-export default function NewEntry() {
-  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm()
+export default function NewEntry({ userInfo }) {
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm({
+    defaultValues: {
+      author: userInfo.username
+    }
+  })
 
   const onSubmit = (data) => {
     createPost(data)
     reset()
   }
+
+  console.log(userInfo.username)
 
   return (
     <Box>

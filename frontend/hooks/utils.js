@@ -115,3 +115,20 @@ export const updatePost = (postId, data, setPosts) => {
       })
     .catch(error=>console.log(error))
 }
+
+// CREATES NEW COMMENT
+export const createComment = (data, setComments) => {
+  axios.post('api/createcomment', data)
+    .then(response=>{
+      console.log(response)
+      getComments(setComments)
+    })
+    .catch(error=>console.log(error))
+}
+
+// GETS ALL POSTS TO DISPLAY
+export const getComments = (setComments) => {
+  axios.get('api/getcomments')
+    .then(response=>setComments(response.data))
+    .catch(error=>console.log(error))
+}

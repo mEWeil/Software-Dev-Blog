@@ -3,8 +3,8 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.core import serializers
 from rest_framework.decorators import api_view
-from .models import User, Entry
-from .serializers import UserSerializer, EntrySerializer
+from .models import User, Entry, Comment
+from .serializers import UserSerializer, EntrySerializer, CommentSerializer
 import json, requests
 import os
 
@@ -13,7 +13,10 @@ def index(request):
     resp = HttpResponse(file)
     return resp
 
-# DJANGO API VIEWS
+"""
+    DJANGO API VIEWS
+"""
+
 @api_view(["POST"])
 def user_signup(request):
     try:
@@ -56,8 +59,9 @@ def create_post(request):
     title = request.data['postTitle']
     entrytype = request.data['postTopic']
     post = request.data['post']
+    author = request.data['author']
     user = request.user
-    entry = Entry(title=title, entrytype=entrytype, entry=post, user=user)
+    entry = Entry(title=title, entrytype=entrytype, entry=post, author=author ,user=user)
     entry.save()
     return JsonResponse({'status': 'entry created'})
 
@@ -83,9 +87,27 @@ def update_post(request, post_id):
         return JsonResponse({'success': True})
     print(serializer.errors)
     return JsonResponse({'success': False})
+
+@api_view(["POST"])
+def create_comment(request):
+    comment = request.data['comment']
+    author = request.data['author']
+    user = request.user
+    entry= Entry.objects.get(pk=request.data['entry'])
+    new_comment = Comment(comment=comment, author=author ,user=user, entry=entry)
+    new_comment.save()
+    return JsonResponse({'status': 'comment created'})
+
+@api_view(["GET"])
+def get_comments(request):
+    comment_list = list(Comment.objects.all())
+    serializer = CommentSerializer(comment_list, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
 """
 3RD PARTY API VIEWS
 """
+
 def get_quotes(request):
     r = requests.get('https://zenquotes.io/api/quotes')
     data = json.loads(r.text)
