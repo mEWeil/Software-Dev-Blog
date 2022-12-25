@@ -1,10 +1,19 @@
 import axios from 'axios'
+import IncorrectLoginAlert from '../components/IncorrectLoginAlert';
 
 // LOGIN
 export function useLogin (data, setUserInfo){
   event.preventDefault()
   axios.post('api/login', data)
-    .then(response=>setUserInfo(response.data))
+    .then(response=>{
+      console.log(response.data);
+      if (response.data['failure']){
+        console.log('no')
+        setUserInfo(null)
+      }else{
+      setUserInfo(response.data);
+      }
+    })
     .catch(error=>console.log(error))
 }
 

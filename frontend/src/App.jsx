@@ -2,7 +2,7 @@ import './App.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
-import { Flex, Button, Text, Box } from '@chakra-ui/react' 
+import { Flex, Button, Text, Box, Heading, Spacer } from '@chakra-ui/react' 
 
 import { getCookie } from '../hooks/utils'
 
@@ -11,6 +11,7 @@ import LoginModal from '../components/LoginModal'
 import SignupModal from '../components/SignupModal'
 import Logout from '../components/Logout'
 import PrivateRoutes from '../pages/components/PrivateRoutes'
+import IncorrectLoginAlert from '../components/IncorrectLoginAlert'
 
 // PAGES
 import Home from '../pages/components/Home'
@@ -26,11 +27,21 @@ export default function App() {
   return (
     <Box className="App">
 
+       {userInfo === null ?
+        <IncorrectLoginAlert setUserInfo={setUserInfo}/>
+        :
+        ''
+       }
+
       <Flex>
-        <Flex border='2px solid black' position="fixed" right="1rem" align="center">
+        <Flex position="relative" right="1rem" align="center">
+        {userInfo ?
+          <Text fontSize='xl' >Welcome {userInfo['username']}!</Text>
+          :
+          <Text fontSize='xl' >Please log in.</Text>}
           <Flex>
             <Link to=''>
-              <Button as="a" colorScheme='blue' variant="ghost" aria-label="Home" w="100%">
+              <Button as="a" colorScheme='teal' variant="outline" w="100%">
                 Home
               </Button>
             </Link>
@@ -40,13 +51,13 @@ export default function App() {
                 <Logout setUserInfo={setUserInfo} />
 
                 <Link to='/newentry'>
-                  <Button as="a" colorScheme='blue' variant="ghost" aria-label="Contact" w="100%">
+                  <Button as="a" colorScheme='teal' variant="outline" w="100%">
                     New Entry
                   </Button>
                 </Link>
 
                 <Link to='/browseentries'>
-                  <Button as="a" colorScheme='blue' variant="ghost" aria-label="Contact" w="100%">
+                  <Button as="a" colorScheme='teal' variant="outline" w="100%">
                     Browse Entries
                   </Button>
                 </Link>
@@ -64,12 +75,6 @@ export default function App() {
           </Flex>
         </Flex>
       </Flex>
-
-
-        {userInfo ?
-          <Text fontSize='xl' >Welcome {userInfo['username']}!</Text>
-          :
-          <Text fontSize='xl' >Please log in.</Text>}
 
       <Routes>
         <Route path='' element={<Home/>} />

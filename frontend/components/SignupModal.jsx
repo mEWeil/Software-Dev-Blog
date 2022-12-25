@@ -29,9 +29,8 @@ export default function SignupModal() {
     <Box>
       <Button 
         as="a" 
-        colorScheme='blue'
-        variant="ghost" 
-        aria-label="About" 
+        colorScheme='teal'
+        variant="outline" 
         w="100%" 
         onClick={onOpen}>
           Sign Up

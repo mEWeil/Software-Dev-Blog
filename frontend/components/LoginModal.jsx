@@ -4,7 +4,6 @@ import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButto
 
 import {useLogin} from '../hooks/utils'
 
-
 export default function LoginModal({ setUserInfo }) {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     defaultValues: {
@@ -15,22 +14,16 @@ export default function LoginModal({ setUserInfo }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const onSubmit = (data) => {
-    try{
       useLogin(data, setUserInfo)
-    }
-    catch(err){
-      console.log('login failed')
-      console.log(err)
-    }
+      onClose()
   } 
 
   return (
     <Box>
       <Button 
         as="a" 
-        variant="ghost" 
-        aria-label="About" 
-        colorScheme='blue'
+        variant="outline" 
+        colorScheme='teal'
         w="100%" 
         onClick={onOpen}>
           Log In
