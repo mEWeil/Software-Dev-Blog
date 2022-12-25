@@ -8,6 +8,7 @@ import DeleteAlert from '../../components/DeleteAlert'
 import EditModal from '../../components/EditModal'
 import CreateComment from '../../components/CreateComment'
 import EditComment from '../../components/EditComment'
+import DeleteComment from '../../components/DeleteComment'
 
 export default function BrowseEntries({ userInfo }) {
   const [posts, setPosts] = useState([])
@@ -61,8 +62,10 @@ export default function BrowseEntries({ userInfo }) {
                             {comment.author} says: 
                           </Box>
                           {post.user === userInfo.id ?
-                            <EditComment {...comment} setComments={setComments}/>
-
+                            <>
+                              <EditComment {...comment} setComments={setComments}/>
+                              <DeleteComment commentId={comment.id} setComments={setComments}/>
+                            </>
                             :
                             ''
                           } 
