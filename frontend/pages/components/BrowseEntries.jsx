@@ -16,8 +16,11 @@ export default function BrowseEntries({ userInfo }) {
   useEffect(()=>{
     getPosts(setPosts)
     getComments(setComments)
-    console.log('comments: ', comments)
   }, [])
+
+  useEffect(()=>{
+    console.log('posts: ', posts)
+  }, [posts])
 
   useEffect(()=>{
     console.log('comments: ', comments)
@@ -48,7 +51,7 @@ export default function BrowseEntries({ userInfo }) {
             <CardFooter>
             <Accordion allowToggle>
               {comments
-                .filter(comment => comment.user === post.user)
+                .filter(comment => comment.entry === post.id)
                 .map(comment => {
                   return(
                     <AccordionItem>
