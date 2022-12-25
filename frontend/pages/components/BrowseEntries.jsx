@@ -7,6 +7,7 @@ import { getPosts, getComments } from '../../hooks/utils'
 import DeleteAlert from '../../components/DeleteAlert'
 import EditModal from '../../components/EditModal'
 import CreateComment from '../../components/CreateComment'
+import EditComment from '../../components/EditComment'
 
 export default function BrowseEntries({ userInfo }) {
   const [posts, setPosts] = useState([])
@@ -56,6 +57,12 @@ export default function BrowseEntries({ userInfo }) {
                           <Box as="span" flex='1' textAlign='left'>
                             {comment.author} says: 
                           </Box>
+                          {post.user === userInfo.id ?
+                            <EditComment {...comment} setComments={setComments}/>
+
+                            :
+                            ''
+                          } 
                           <AccordionIcon />
                         </AccordionButton>
                       </Text>

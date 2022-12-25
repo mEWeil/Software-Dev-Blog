@@ -80,7 +80,6 @@ def delete_post(request, post_id):
 @api_view(['PUT'])
 def update_post(request, post_id):
     entry = Entry.objects.get(pk=post_id)
-    print(request.data)
     serializer = EntrySerializer(entry, data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -103,6 +102,22 @@ def get_comments(request):
     comment_list = list(Comment.objects.all())
     serializer = CommentSerializer(comment_list, many=True)
     return JsonResponse(serializer.data, safe=False)
+
+@api_view(['DELETE'])
+def delete_comment(request, comment_id):
+    comment = Comment.objects.get(pk=comment_id)
+    comment.delete()
+    return JsonResponse({'Status': 'comment deletion successful'})
+
+@api_view(['PUT'])
+def update_comment(request, comment_id):
+    comment = Comment.objects.get(pk=comment_id)
+    serializer = CommentSerializer(comment, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return JsonResponse({'success': True})
+    print(serializer.errors)
+    return JsonResponse({'success': False})
 
 """
 3RD PARTY API VIEWS

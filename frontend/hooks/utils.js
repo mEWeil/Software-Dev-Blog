@@ -132,3 +132,23 @@ export const getComments = (setComments) => {
     .then(response=>setComments(response.data))
     .catch(error=>console.log(error))
 }
+
+// DELETES SPECIFIED COMMENT
+export const deleteComment = (commentId, setComments) => {
+  axios.delete('api/deletecomment/'+commentId+'')
+    .then(response=>{
+      console.log(response);
+      getComments(setComments);
+      })
+    .catch(error=>console.log(error))
+}
+
+// UPDATES SPECIFIED Comment
+export const updateComment = (commentId, data, setComments) => {
+  axios.put('api/updatecomment/'+commentId+'', data)
+    .then(response=>{
+      console.log(response);
+      getComments(setComments);
+      })
+    .catch(error=>console.log(error))
+}

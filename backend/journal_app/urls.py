@@ -12,6 +12,8 @@ urlpatterns = [
     path('api/updatepost/<int:post_id>', views.update_post),
     path('api/createcomment', views.create_comment),
     path('api/getcomments', views.get_comments),
+    path('api/deletecomment/<int:comment_id>', views.delete_comment),
+    path('api/updatecomment/<int:comment_id>', views.update_comment),
     path('api/getquotes', views.get_quotes),
     path('api/getcollectionids', views.get_collection_ids),
     path('api/getcollectionurls', views.get_collection_urls),
