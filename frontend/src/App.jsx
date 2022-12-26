@@ -36,7 +36,7 @@ export default function App() {
           <Flex bg='rgb(174, 254, 255)' position="static" minWidth='max-content' alignItems='center' gap='2'>
 
             <Box p='2'>
-              {userInfo ?
+              {userInfo !== false & userInfo !== 'failed' ?
                 <Heading  >Welcome {userInfo['username']}!</Heading>
                 :
                 <Heading  >Please log in.</Heading>}
@@ -51,7 +51,7 @@ export default function App() {
                 </Button>
               </Link>
 
-              {userInfo ?
+              {userInfo !== false & userInfo !== 'failed' ?
                 <>
                   <Logout setUserInfo={setUserInfo} />
 

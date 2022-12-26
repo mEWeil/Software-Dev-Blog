@@ -66,6 +66,7 @@ export const useSendQuote = (setDisplayQuote, quotes) => {
 export const useGetCollectionIds = (setCategories) => {
   axios.get('api/getcollectionids')
     .then(response=>{
+      console.log(response)
       let collections = response.data.data.collections;
       let collectionArr = [];
       collections.map(collection=>{
@@ -78,7 +79,10 @@ export const useGetCollectionIds = (setCategories) => {
 // SENDS POST REQUEST TO DAJNGO > SENDS GET REQUEST TO PEXELS TO RETRIEVE ARRAY WITH PICTURE URLS
 export const useGetPictureUrls = (setPictureUrls, data) => {
   axios.post('api/getcollectionurls', data)
-    .then(response=>setPictureUrls(response.data.data['media']))
+    .then(response=>{
+      console.log(response)
+      setPictureUrls(response.data.data['media'])
+    })
     .catch(error=>console.log(error))
 }
 

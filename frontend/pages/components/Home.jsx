@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Box, Menu, MenuButton, MenuList, MenuItem, Button, Text, Image, Center } from '@chakra-ui/react'
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import { Box, Menu, MenuButton, MenuList, MenuItem, Button, Text, Image, Center, ButtonGroup } from '@chakra-ui/react'
+import { ChevronUpIcon } from '@chakra-ui/icons'
 import { useGetQuotes, useSendQuote, useGetCollectionIds, useGetPictureUrls, useSendPicture } from '../../hooks/utils'
 
 export default function Home() {
@@ -16,10 +16,8 @@ export default function Home() {
   // RANDOMLY SELECTED PICTURE FROM CURRENT CATEGORY/THEME
   const [displayPicture, setDisplayPicture] = useState('')
 
-  const boxStyle = {
+  const boxImage = {
     backgroundImage: 'url(' +displayPicture+ ')',
-    // height: 'auto',
-    // width: 'auto',
     backgroundPosition: 'center',
     backgroundSize: 'cover',
   }
@@ -27,34 +25,50 @@ export default function Home() {
   // RETRIEVES QUOTE ARRAY ON INITIAL RENDER
   useEffect(() => {
     useGetQuotes(setQuotes)
-    useGetCollectionIds(setCategories)
+    // useGetCollectionIds(setCategories)
   }, [])
 
   useEffect(() => {
     useSendQuote(setDisplayQuote, quotes)
   }, [quotes])
 
-  useEffect(() => {
-    useGetPictureUrls(setPictureUrls, {'id': 'oy45lci'})
-  }, [categories])
+  // useEffect(() => {
+  //   useGetPictureUrls(setPictureUrls, {'id': 'oy45lci'})
+  // }, [categories])
 
-  useEffect(() => {
-    pictureUrls ?
-    useSendPicture(setDisplayPicture, pictureUrls)
-    :
-    ''
-  }, [pictureUrls])
+  // useEffect(() => {
+  //   pictureUrls ?
+  //   useSendPicture(setDisplayPicture, pictureUrls)
+  //   :
+  //   ''
+  // }, [pictureUrls])
 
   return (
     <Box>
-      <Text fontSize='xl' >This is the Home Page</Text>    
 
-      <Box style={boxStyle} border='2px solid black' width='100%' height='100vh' >
-          {/* <Image src={displayPicture} alt="pexels image"/> */}
+      <Box bg='rgb(79, 189, 186)'>
+        <Text fontSize='xl' >This is the Home Page</Text>   
+      </Box> 
+
+
+      <Box style={boxImage} bg='rgb(53, 133, 139)' width='100%' height='100vh' >
+
+        {displayQuote ?
+          <Center display='inline-block' top='35%' padding='10px' marginLeft='auto' marginRight='auto' position='relative' bg='rgb(174, 254, 255)'>
+              <Text fontSize='2xl'>{displayQuote.q}</Text> 
+              <Text fontSize='xl'>{displayQuote.a}</Text>
+          </Center>
+          :
+          <Center display='inline-block' top='35%' padding='10px' marginLeft='auto' marginRight='auto' position='relative' bg='rgb(174, 254, 255)'>
+            <Text fontSize='xl'>Loading...</Text>
+          </Center>
+        }
+
+        <ButtonGroup size='xs' position='fixed' bottom='0' right='0'>
           <Button onClick={()=>useSendQuote(setDisplayQuote, quotes)}>Refresh Quote</Button>
           <Button onClick={()=>useSendPicture(setDisplayPicture, pictureUrls)}>Refresh Picture</Button> 
           <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+            <MenuButton as={Button} rightIcon={<ChevronUpIcon />}>
               Background Categories
             </MenuButton>
             <MenuList>
@@ -65,14 +79,8 @@ export default function Home() {
               })}
             </MenuList>
           </Menu>
-          {displayQuote ?
-            <Center>
-              <Text fontSize='2xl'>{displayQuote.q}</Text> 
-              <Text fontSize='xl'>{displayQuote.a}</Text>
-            </Center>
-            :
-            <Text fontSize='xl'>Loading...</Text>
-            }
+        </ButtonGroup>  
+
       </Box>
     </Box>
   )
