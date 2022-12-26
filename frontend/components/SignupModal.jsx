@@ -28,9 +28,8 @@ export default function SignupModal() {
   return (
     <Box>
       <Button 
-        as="a" 
         colorScheme='teal'
-        variant="outline" 
+        variant="solid" 
         w="100%" 
         onClick={onOpen}>
           Sign Up

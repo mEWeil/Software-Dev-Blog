@@ -16,7 +16,7 @@ export default function DeleteAlert({ postId, setPosts }) {
 
   return (
     <>
-      <IconButton aria-label='Delete' icon={<DeleteIcon />} onClick={onOpen}/>
+      <IconButton size='sm' aria-label='Delete' icon={<DeleteIcon />} onClick={onOpen}/>
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}

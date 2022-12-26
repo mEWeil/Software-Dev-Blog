@@ -20,8 +20,8 @@ export default function NewEntry({ userInfo }) {
 
   return (
     <Box>
-      <Text fontSize='xl'>This is the New Entry Page</Text>
-      <Box>
+      <Text fontSize='xl' bg='rgb(79, 189, 186)'>This is the New Entry Page</Text>
+      <Box bg='rgb(53, 133, 139)' width='100%' height='100vh'>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormControl isInvalid={errors.postTitle}>
             <FormLabel>Post Title: </FormLabel>

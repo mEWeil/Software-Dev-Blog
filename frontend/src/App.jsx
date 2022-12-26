@@ -1,6 +1,6 @@
 import './App.css'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 import { Flex, Button, Text, Box, Heading, Spacer, ButtonGroup } from '@chakra-ui/react' 
 
@@ -46,7 +46,7 @@ export default function App() {
 
             <ButtonGroup isAttached='true' spacing='1rem'>
               <Link to=''>
-                <Button as="a" colorScheme='teal'  variant="solid" w="100%">
+                <Button colorScheme='teal'  variant="solid" w="100%">
                   Home
                 </Button>
               </Link>
@@ -56,13 +56,13 @@ export default function App() {
                   <Logout setUserInfo={setUserInfo} />
 
                   <Link to='/newentry'>
-                    <Button as="a" colorScheme='teal' variant="outline" w="100%">
+                    <Button colorScheme='teal' variant="solid" w="100%">
                       New Entry
                     </Button>
                   </Link>
 
                   <Link to='/browseentries'>
-                    <Button as="a" colorScheme='teal' variant="outline" w="100%">
+                    <Button colorScheme='teal' variant="solid" w="100%">
                       Browse Entries
                     </Button>
                   </Link>

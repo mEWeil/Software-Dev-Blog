@@ -25,8 +25,7 @@ export default function Logout({ setUserInfo }) {
     <Button 
       onClick={()=>onClickHandler()}
       colorScheme='teal'
-      as="a" 
-      variant="outline"  
+      variant="solid"  
       w="100%">
         Log Out
     </Button>

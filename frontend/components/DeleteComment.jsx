@@ -16,7 +16,7 @@ export default function DeleteComment({ commentId, setComments}) {
 
   return (
     <>
-      <IconButton aria-label='Delete' icon={<DeleteIcon />} onClick={onOpen}/>
+      <IconButton size='sm' icon={<DeleteIcon />} onClick={onOpen}/>
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}

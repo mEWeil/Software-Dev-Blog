@@ -21,8 +21,7 @@ export default function LoginModal({ setUserInfo }) {
   return (
     <Box>
       <Button 
-        as="a" 
-        variant="outline" 
+        variant="solid" 
         colorScheme='teal'
         w="100%" 
         onClick={onOpen}>

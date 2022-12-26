@@ -64,7 +64,7 @@ export default function Home() {
           </Center>
         }
 
-        <ButtonGroup size='xs' position='fixed' bottom='0' right='0'>
+        <ButtonGroup size='xs' position='fixed' bottom='0' right='0' isAttached='true'>
           <Button onClick={()=>useSendQuote(setDisplayQuote, quotes)}>Refresh Quote</Button>
           <Button onClick={()=>useSendPicture(setDisplayPicture, pictureUrls)}>Refresh Picture</Button> 
           <Menu>

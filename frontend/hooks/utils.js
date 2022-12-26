@@ -21,7 +21,7 @@ export function useLogout(data, setUserInfo){
   axios.post('api/logout')
     .then(response=>{
       console.log(response);
-      setUserInfo(null);
+      setUserInfo(false);
     })
     .catch(error=>console.log(error))
 }
