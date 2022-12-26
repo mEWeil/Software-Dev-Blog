@@ -2,7 +2,7 @@ import './App.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
-import { Flex, Button, Text, Box, Heading, Spacer } from '@chakra-ui/react' 
+import { Flex, Button, Text, Box, Heading, Spacer, ButtonGroup } from '@chakra-ui/react' 
 
 import { getCookie } from '../hooks/utils'
 
@@ -27,54 +27,55 @@ export default function App() {
   return (
     <Box className="App">
 
-       {userInfo === null ?
+       {userInfo === 'failed' ?
         <IncorrectLoginAlert setUserInfo={setUserInfo}/>
         :
         ''
        }
 
-      <Flex>
-        <Flex position="relative" right="1rem" align="center">
-        {userInfo ?
-          <Text fontSize='xl' >Welcome {userInfo['username']}!</Text>
-          :
-          <Text fontSize='xl' >Please log in.</Text>}
-          <Flex>
-            <Link to=''>
-              <Button as="a" colorScheme='teal' variant="outline" w="100%">
-                Home
-              </Button>
-            </Link>
+          <Flex bg='rgb(174, 254, 255)' position="static" minWidth='max-content' alignItems='center' gap='2'>
 
-            {userInfo ?
+            <Box p='2'>
+              {userInfo ?
+                <Heading  >Welcome {userInfo['username']}!</Heading>
+                :
+                <Heading  >Please log in.</Heading>}
+            </Box>
+
+            <Spacer />
+
+            <ButtonGroup isAttached='true' spacing='1rem'>
+              <Link to=''>
+                <Button as="a" colorScheme='teal'  variant="solid" w="100%">
+                  Home
+                </Button>
+              </Link>
+
+              {userInfo ?
+                <>
+                  <Logout setUserInfo={setUserInfo} />
+
+                  <Link to='/newentry'>
+                    <Button as="a" colorScheme='teal' variant="outline" w="100%">
+                      New Entry
+                    </Button>
+                  </Link>
+
+                  <Link to='/browseentries'>
+                    <Button as="a" colorScheme='teal' variant="outline" w="100%">
+                      Browse Entries
+                    </Button>
+                  </Link>
+                </>
+              :
               <>
-                <Logout setUserInfo={setUserInfo} />
+                <LoginModal setUserInfo={setUserInfo} />
 
-                <Link to='/newentry'>
-                  <Button as="a" colorScheme='teal' variant="outline" w="100%">
-                    New Entry
-                  </Button>
-                </Link>
-
-                <Link to='/browseentries'>
-                  <Button as="a" colorScheme='teal' variant="outline" w="100%">
-                    Browse Entries
-                  </Button>
-                </Link>
+                <SignupModal />
               </>
-            :
-            <>
-              <LoginModal setUserInfo={setUserInfo} />
-
-              <SignupModal />
-            </>
-            }
-
-            
-
+              }
+            </ButtonGroup>
           </Flex>
-        </Flex>
-      </Flex>
 
       <Routes>
         <Route path='' element={<Home/>} />

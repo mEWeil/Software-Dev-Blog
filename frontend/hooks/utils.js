@@ -8,8 +8,7 @@ export function useLogin (data, setUserInfo){
     .then(response=>{
       console.log(response.data);
       if (response.data['failure']){
-        console.log('no')
-        setUserInfo(null)
+        setUserInfo('failed')
       }else{
       setUserInfo(response.data);
       }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Box, Menu, MenuButton, MenuList, MenuItem, Button, Text, Image } from '@chakra-ui/react'
+import { Box, Menu, MenuButton, MenuList, MenuItem, Button, Text, Image, Center } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { useGetQuotes, useSendQuote, useGetCollectionIds, useGetPictureUrls, useSendPicture } from '../../hooks/utils'
 
@@ -15,6 +15,14 @@ export default function Home() {
   const [pictureUrls, setPictureUrls] = useState(null)
   // RANDOMLY SELECTED PICTURE FROM CURRENT CATEGORY/THEME
   const [displayPicture, setDisplayPicture] = useState('')
+
+  const boxStyle = {
+    backgroundImage: 'url(' +displayPicture+ ')',
+    // height: 'auto',
+    // width: 'auto',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+  }
 
   // RETRIEVES QUOTE ARRAY ON INITIAL RENDER
   useEffect(() => {
@@ -41,8 +49,8 @@ export default function Home() {
     <Box>
       <Text fontSize='xl' >This is the Home Page</Text>    
 
-      <Box border='2px solid black' width='auto' height='auto' >
-          <Image src={displayPicture} alt="pexels image"/>
+      <Box style={boxStyle} border='2px solid black' width='100%' height='100vh' >
+          {/* <Image src={displayPicture} alt="pexels image"/> */}
           <Button onClick={()=>useSendQuote(setDisplayQuote, quotes)}>Refresh Quote</Button>
           <Button onClick={()=>useSendPicture(setDisplayPicture, pictureUrls)}>Refresh Picture</Button> 
           <Menu>
@@ -58,10 +66,10 @@ export default function Home() {
             </MenuList>
           </Menu>
           {displayQuote ?
-            <Box>
+            <Center>
               <Text fontSize='2xl'>{displayQuote.q}</Text> 
               <Text fontSize='xl'>{displayQuote.a}</Text>
-            </Box>
+            </Center>
             :
             <Text fontSize='xl'>Loading...</Text>
             }
