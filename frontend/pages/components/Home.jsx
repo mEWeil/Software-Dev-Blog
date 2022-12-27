@@ -25,36 +25,36 @@ export default function Home() {
   // RETRIEVES QUOTE ARRAY ON INITIAL RENDER
   useEffect(() => {
     useGetQuotes(setQuotes)
-    // useGetCollectionIds(setCategories)
+    useGetCollectionIds(setCategories)
   }, [])
 
   useEffect(() => {
     useSendQuote(setDisplayQuote, quotes)
   }, [quotes])
 
-  // useEffect(() => {
-  //   useGetPictureUrls(setPictureUrls, {'id': 'oy45lci'})
-  // }, [categories])
+  useEffect(() => {
+    useGetPictureUrls(setPictureUrls, {'id': 'oy45lci'})
+  }, [categories])
 
-  // useEffect(() => {
-  //   pictureUrls ?
-  //   useSendPicture(setDisplayPicture, pictureUrls)
-  //   :
-  //   ''
-  // }, [pictureUrls])
+  useEffect(() => {
+    pictureUrls ?
+    useSendPicture(setDisplayPicture, pictureUrls)
+    :
+    ''
+  }, [pictureUrls])
 
   return (
     <Box>
 
-      <Box bg='rgb(79, 189, 186)'>
-        <Text fontSize='xl' >This is the Home Page</Text>   
+      <Box bg='space.200'>
+        <Text fontSize='xl' textColor='space.400' >Home</Text>   
       </Box> 
 
 
-      <Box style={boxImage} bg='rgb(53, 133, 139)' width='100%' height='100vh' >
+      <Box style={boxImage} bg='space.400' width='100%' height='100vh' >
 
         {displayQuote ?
-          <Center display='inline-block' top='35%' padding='10px' marginLeft='auto' marginRight='auto' position='relative' bg='rgb(174, 254, 255)'>
+          <Center display='inline-block' top='35%' padding='20px' marginLeft='auto' marginRight='auto' position='relative' bg='rgb(174, 254, 255)' borderRadius='10px'>
               <Text fontSize='2xl'>{displayQuote.q}</Text> 
               <Text fontSize='xl'>{displayQuote.a}</Text>
           </Center>
@@ -64,11 +64,11 @@ export default function Home() {
           </Center>
         }
 
-        <ButtonGroup size='xs' position='fixed' bottom='0' right='0' isAttached='true'>
-          <Button onClick={()=>useSendQuote(setDisplayQuote, quotes)}>Refresh Quote</Button>
-          <Button onClick={()=>useSendPicture(setDisplayPicture, pictureUrls)}>Refresh Picture</Button> 
+        <ButtonGroup variant="solid" size='xs' position='fixed' bottom='0' right='0' isAttached='true'>
+          <Button onClick={()=>useSendQuote(setDisplayQuote, quotes)} bg='space.300' color='white' _hover={{ bg:'teal' }} >Refresh Quote</Button>
+          <Button onClick={()=>useSendPicture(setDisplayPicture, pictureUrls)} bg='space.300' color='white' _hover={{ bg:'teal' }} >Refresh Picture</Button> 
           <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronUpIcon />}>
+            <MenuButton as={Button} rightIcon={<ChevronUpIcon />} bg='space.300' color='white' _hover={{ bg:'teal' }}>
               Background Categories
             </MenuButton>
             <MenuList>

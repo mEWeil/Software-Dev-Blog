@@ -28,7 +28,7 @@ export default function CreateComment({ userInfo, entryId, setComments }) {
 
   return (
     <>
-      <IconButton aria-label='Edit-Post' icon={<ChatIcon />} onClick={onOpen}/>
+      <IconButton bg='space.300' size='sm' icon={<ChatIcon />} onClick={onOpen}/>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

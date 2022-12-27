@@ -16,7 +16,7 @@ export default function DeleteComment({ commentId, setComments}) {
 
   return (
     <>
-      <IconButton size='sm' icon={<DeleteIcon />} onClick={onOpen}/>
+      <IconButton margin='.5rem' bg='space.200' size='xs' icon={<DeleteIcon />} onClick={onOpen}/>
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}

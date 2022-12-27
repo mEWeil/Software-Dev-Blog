@@ -22,7 +22,9 @@ export default function LoginModal({ setUserInfo }) {
     <Box>
       <Button 
         variant="solid" 
-        colorScheme='teal'
+        bg='space.300' 
+        color='space.100'
+        _hover={{ bg:'teal' }}
         w="100%" 
         onClick={onOpen}>
           Log In

@@ -26,7 +26,7 @@ export default function EditModal({ title, entry, id, entrytype, setPosts, userI
 
   return (
     <>
-      <IconButton size='sm' icon={<EditIcon />} onClick={onOpen}/>
+      <IconButton bg='space.300' size='sm' icon={<EditIcon />} onClick={onOpen}/>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

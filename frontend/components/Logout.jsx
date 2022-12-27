@@ -24,7 +24,9 @@ export default function Logout({ setUserInfo }) {
   return (
     <Button 
       onClick={()=>onClickHandler()}
-      colorScheme='teal'
+      bg='space.300' 
+      color='space.100'
+      _hover={{ bg:'teal' }}
       variant="solid"  
       w="100%">
         Log Out

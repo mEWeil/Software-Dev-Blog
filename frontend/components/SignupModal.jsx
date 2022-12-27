@@ -28,7 +28,9 @@ export default function SignupModal() {
   return (
     <Box>
       <Button 
-        colorScheme='teal'
+        bg='space.300' 
+        color='space.100'
+        _hover={{ bg:'teal' }}
         variant="solid" 
         w="100%" 
         onClick={onOpen}>

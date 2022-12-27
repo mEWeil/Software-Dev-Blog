@@ -23,7 +23,7 @@ export default function EditComment({ id, comment, user, entry, setComments }) {
 
   return (
     <>
-      <IconButton size='sm' aria-label='Edit-Post' icon={<EditIcon />} onClick={onOpen}/>
+      <IconButton margin='.5rem' bg='space.200' size='xs' icon={<EditIcon />} onClick={onOpen}/>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

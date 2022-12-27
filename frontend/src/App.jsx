@@ -33,20 +33,20 @@ export default function App() {
         ''
        }
 
-          <Flex bg='rgb(174, 254, 255)' position="static" minWidth='max-content' alignItems='center' gap='2'>
+          <Flex bg='space.100' position="static" minWidth='max-content' alignItems='center' gap='2'>
 
             <Box p='2'>
               {userInfo !== false & userInfo !== 'failed' ?
-                <Heading  >Welcome {userInfo['username']}!</Heading>
+                <Heading textColor='space.400' >Welcome {userInfo['username']}!</Heading>
                 :
-                <Heading  >Please log in.</Heading>}
+                <Heading textColor='space.400' >Please log in.</Heading>}
             </Box>
 
             <Spacer />
 
-            <ButtonGroup isAttached='true' spacing='1rem'>
+            <ButtonGroup spacing='1rem'>
               <Link to=''>
-                <Button colorScheme='teal'  variant="solid" w="100%">
+                <Button bg='space.300' color='space.100' _hover={{ bg:'teal' }} variant="solid" w="100%">
                   Home
                 </Button>
               </Link>
@@ -56,13 +56,13 @@ export default function App() {
                   <Logout setUserInfo={setUserInfo} />
 
                   <Link to='/newentry'>
-                    <Button colorScheme='teal' variant="solid" w="100%">
+                    <Button bg='space.300' color='space.100' _hover={{ bg:'teal' }} variant="solid" w="100%">
                       New Entry
                     </Button>
                   </Link>
 
                   <Link to='/browseentries'>
-                    <Button colorScheme='teal' variant="solid" w="100%">
+                    <Button bg='space.300' color='space.100' _hover={{ bg:'teal' }} variant="solid" w="100%">
                       Browse Entries
                     </Button>
                   </Link>
