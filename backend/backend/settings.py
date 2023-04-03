@@ -18,7 +18,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://mattsreactblog.com']
+CSRF_TRUSTED_ORIGINS = ['https://mattsdevblog.net']
 
 
 # Application definition
